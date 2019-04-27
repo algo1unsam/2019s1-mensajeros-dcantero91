@@ -1,4 +1,6 @@
 import mensajeros.*
+import lugares.*
+import transporte.*
 
 test "La mensajeria tiene a neo como empleado si lo agregarmos" {
 	mensajeria.contratar(neo)
@@ -10,4 +12,15 @@ test "Si neo es empleado, Hay un mensajero que puede enviar el paquete" {
 	paquete.pagar()
 	paquete.destino(matrix)
 	assert.that(mensajeria.mensajeros().contains(neo))
+}
+test "Roberto paquete esta pago en un camión 1 acoplado" {
+	mensajeria.contratar(roberto)
+	paquete.pagar()
+	paquete.destino(puenteDeBrooklin)
+	assert.that(mensajeria.paquetePuedeEntregarse())
+}
+test "Neo no puede llevar paquete no pago en Matrix" {
+	mensajeria.contratar(neo)
+	paquete.destino(matrix)
+	assert.notThat(mensajeria.paquetePuedeEntregarse())
 }
